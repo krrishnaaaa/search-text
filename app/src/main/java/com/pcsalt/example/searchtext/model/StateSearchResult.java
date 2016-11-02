@@ -1,5 +1,6 @@
 package com.pcsalt.example.searchtext.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.pcsalt.example.searchtext.model.state.Result;
 
 import java.util.List;
@@ -9,22 +10,38 @@ import java.util.List;
  */
 
 public class StateSearchResult {
-    private String message;
-    private List<Result> results;
+    @SerializedName("RestResponse")
+    private RestResponse restResponse;
 
-    public String getMessage() {
-        return message;
+    public RestResponse getRestResponse() {
+        return restResponse;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setRestResponse(RestResponse restResponse) {
+        this.restResponse = restResponse;
     }
 
-    public List<Result> getResults() {
-        return results;
-    }
+    public class RestResponse {
+        @SerializedName("messages")
+        private List<String> message;
 
-    public void setResults(List<Result> results) {
-        this.results = results;
+        @SerializedName("result")
+        private List<Result> results;
+
+        public List<String> getMessage() {
+            return message;
+        }
+
+        public void setMessage(List<String> message) {
+            this.message = message;
+        }
+
+        public List<Result> getResults() {
+            return results;
+        }
+
+        public void setResults(List<Result> results) {
+            this.results = results;
+        }
     }
 }

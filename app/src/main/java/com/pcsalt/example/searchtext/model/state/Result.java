@@ -1,16 +1,29 @@
 package com.pcsalt.example.searchtext.model.state;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Navkrishna on 02 November, 2016
  */
 
 public class Result {
 
+    @SerializedName("country")
     private String country;
+
+    @SerializedName("name")
     private String name;
+
+    @SerializedName("abbr")
     private String abbr;
+
+    @SerializedName("area")
     private String area;
+
+    @SerializedName("largest_city")
     private String largestCity;
+
+    @SerializedName("capital")
     private String capital;
 
     public String getCountry() {
