@@ -43,7 +43,7 @@ public class StateSearchPresenter implements Presenter<StateSearchView> {
                         mView.hideProgress();
                         Log.d(TAG, mResult.getRestResponse().toString());
                         if (mResult.getRestResponse().getResults().isEmpty()) {
-                            mView.onFail(mResult.getRestResponse().getMessage().get(0));
+                            mView.onFail(mResult.getRestResponse().getMessage().get(1));
                         } else {
                             mView.onSuccess(mResult);
                         }
@@ -51,6 +51,7 @@ public class StateSearchPresenter implements Presenter<StateSearchView> {
 
                     @Override
                     public void onError(Throwable throwable) {
+                        mView.hideProgress();
                         mView.onFail(Utils.errorHandleResponse(throwable, mView.getContext()));
                     }
 
