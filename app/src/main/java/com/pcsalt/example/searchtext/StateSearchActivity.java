@@ -43,15 +43,18 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
     @Override
     public void onSuccess(StateSearchResult stateSearchResult) {
         mRvResult.setAdapter(new StateListAdapter(stateSearchResult.getRestResponse().getResults()));
+        mRvResult.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onFail(String message) {
+        mRvResult.setVisibility(View.GONE);
         Toast.makeText(this, "Error: " + message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showProgress() {
+        mRvResult.setVisibility(View.GONE);
         mProgressView.setVisibility(View.VISIBLE);
     }
 
