@@ -6,8 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pcsalt.example.searchtext.model.StateSearchResult;
@@ -37,6 +41,22 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
         mProgressView = findViewById(R.id.ll_progress);
         mEtSearch = (EditText) findViewById(R.id.et_search_state);
         mRvResult = (RecyclerView) findViewById(R.id.rv_search_state);
+
+        mEtSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        mEtSearch.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        mEtSearch.setLines(1);
+        mEtSearch.setHorizontallyScrolling(true);
+        mEtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         mRvResult.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     }
 
@@ -68,7 +88,8 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
         return this;
     }
 
-    public void search(View view) {
+    public void search() {
+        Utils.hideKeyboard(getContext(), mEtSearch);
         mPresenter.searchState(Utils.getText(mEtSearch));
     }
 }

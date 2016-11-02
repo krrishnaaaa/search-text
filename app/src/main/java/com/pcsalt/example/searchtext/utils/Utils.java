@@ -1,6 +1,8 @@
 package com.pcsalt.example.searchtext.utils;
 
 import android.content.Context;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.pcsalt.example.searchtext.BuildConfig;
@@ -34,6 +36,14 @@ public final class Utils {
             return context.getString(R.string.err_no_network);
         } else {
             return context.getString(R.string.err_connection_lost);
+        }
+    }
+
+    public static void hideKeyboard(Context context, View textView) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        if (imm != null && textView != null) {
+            imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
         }
     }
 }
