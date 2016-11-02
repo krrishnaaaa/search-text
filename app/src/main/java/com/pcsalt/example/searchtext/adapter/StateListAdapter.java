@@ -1,4 +1,4 @@
-package com.pcsalt.example.searchtext;
+package com.pcsalt.example.searchtext.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.pcsalt.example.searchtext.R;
 import com.pcsalt.example.searchtext.model.state.Result;
 
 import java.util.List;

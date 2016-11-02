@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pcsalt.example.searchtext.adapter.StateListAdapter;
 import com.pcsalt.example.searchtext.model.StateSearchResult;
 import com.pcsalt.example.searchtext.presenter.StateSearchPresenter;
 import com.pcsalt.example.searchtext.utils.Utils;
