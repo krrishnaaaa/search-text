@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pcsalt.example.searchtext.adapter.StateListAdapter;
 import com.pcsalt.example.searchtext.model.StateSearchResult;
@@ -29,7 +28,8 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
     private StateSearchPresenter mPresenter;
     private EditText mEtSearch;
     private RecyclerView mRvResult;
-    private View mProgressView;
+    private View mProgressView, mErrorView;
+    private TextView mTvError;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +40,8 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
         mPresenter.attachView(this);
 
         mProgressView = findViewById(R.id.ll_progress);
+        mErrorView = findViewById(R.id.ll_error);
+        mTvError = (TextView) findViewById(R.id.tv_message);
         mEtSearch = (EditText) findViewById(R.id.et_search_state);
         mRvResult = (RecyclerView) findViewById(R.id.rv_search_state);
 
@@ -65,18 +67,21 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
     public void onSuccess(StateSearchResult stateSearchResult) {
         mRvResult.setAdapter(new StateListAdapter(stateSearchResult.getRestResponse().getResults()));
         mRvResult.setVisibility(View.VISIBLE);
+        mErrorView.setVisibility(View.GONE);
     }
 
     @Override
     public void onFail(String message) {
         mRvResult.setVisibility(View.GONE);
-        Toast.makeText(this, "Error: " + message, Toast.LENGTH_SHORT).show();
+        mErrorView.setVisibility(View.VISIBLE);
+        mTvError.setText(message);
     }
 
     @Override
     public void showProgress() {
         mRvResult.setVisibility(View.GONE);
         mProgressView.setVisibility(View.VISIBLE);
+        mErrorView.setVisibility(View.GONE);
     }
 
     @Override
