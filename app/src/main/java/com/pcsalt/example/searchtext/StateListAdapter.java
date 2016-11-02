@@ -1,5 +1,6 @@
 package com.pcsalt.example.searchtext;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,15 @@ public class StateListAdapter extends RecyclerView.Adapter<StateListAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Result currentResult = resultList.get(position);
-        holder.tvName.setText(currentResult.getName());
+        Context context = holder.itemView.getContext();
+        if (currentResult.getLargestCity() == null) {
+            holder.tvLargestCity.setVisibility(View.GONE);
+        } else {
+            holder.tvLargestCity.setVisibility(View.VISIBLE);
+            holder.tvLargestCity.setText(String.format(context.getString(R.string.txt_largest_city), currentResult.getLargestCity()));
+        }
+        holder.tvCapital.setText(String.format(context.getString(R.string.txt_capital), currentResult.getCapital()));
+        holder.tvStateName.setText(String.format(context.getString(R.string.txt_state), currentResult.getName()));
     }
 
     @Override
@@ -40,11 +49,13 @@ public class StateListAdapter extends RecyclerView.Adapter<StateListAdapter.View
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName;
+        TextView tvLargestCity, tvCapital, tvStateName;
 
         ViewHolder(View itemView) {
             super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.tv_name);
+            tvLargestCity = (TextView) itemView.findViewById(R.id.tv_largest_city);
+            tvCapital = (TextView) itemView.findViewById(R.id.tv_capital);
+            tvStateName = (TextView) itemView.findViewById(R.id.tv_state_name);
         }
     }
 }
