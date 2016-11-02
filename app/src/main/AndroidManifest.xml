@@ -26,6 +26,10 @@
         <activity
             android:name=".IpSearchActivity"
             android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCDlsKS7gEJL7UFkRZOxl-cihlutd0kLB0" />
     </application>
 
 </manifest>

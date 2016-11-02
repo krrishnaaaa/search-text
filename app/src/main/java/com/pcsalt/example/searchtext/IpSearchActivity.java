@@ -11,6 +11,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.pcsalt.example.searchtext.model.IPSearchResult;
 import com.pcsalt.example.searchtext.model.ip.Result;
 import com.pcsalt.example.searchtext.presenter.IPSearchPresenter;
@@ -21,12 +28,14 @@ import com.pcsalt.example.searchtext.view.IPSearchView;
  * Created by Navkrishna on 02 November, 2016
  */
 
-public class IpSearchActivity extends AppCompatActivity implements IPSearchView {
+public class IpSearchActivity extends AppCompatActivity implements IPSearchView, OnMapReadyCallback {
 
     private IPSearchPresenter mPresenter;
     private EditText mEtSearch;
     private View mProgressView, mErrorView, mInfoView;
     private TextView mTvError, mTvIpInfo;
+    private GoogleMap googleMap;
+    private Marker marker;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +66,9 @@ public class IpSearchActivity extends AppCompatActivity implements IPSearchView 
                 return false;
             }
         });
+
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -70,6 +82,17 @@ public class IpSearchActivity extends AppCompatActivity implements IPSearchView 
                 result.getContinent());
         mTvIpInfo.setText(ipInfo);
         mInfoView.setVisibility(View.VISIBLE);
+
+        if (googleMap != null) {
+            MarkerOptions markerOptions = new MarkerOptions().position(
+                    new LatLng(result.getLatitude(), result.getLongitude()))
+                    .title(result.getCity());
+            if (marker != null) {
+                marker.remove();
+            }
+            marker = googleMap.addMarker(markerOptions);
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 13.0f));
+        }
     }
 
     @Override
@@ -106,5 +129,10 @@ public class IpSearchActivity extends AppCompatActivity implements IPSearchView 
         } else {
             mPresenter.searchIP(ip);
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        this.googleMap = googleMap;
     }
 }
