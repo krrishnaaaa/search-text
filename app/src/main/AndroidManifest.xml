@@ -15,6 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".StateSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IpSearchActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
