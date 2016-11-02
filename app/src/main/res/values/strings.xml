@@ -4,4 +4,8 @@
     <string name="lbl_ip_search">IP Search</string>
     <string name="hint_enter_state_name">Enter state name</string>
     <string name="lbl_search">Search</string>
+
+    <string name="err_connection_lost">Connection with server is lost. Please try in few minutes.</string>
+    <string name="err_no_network">Please check your internet connection!</string>
+
 </resources>
