@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.pcsalt.example.searchtext.model.StateSearchResult;
 import com.pcsalt.example.searchtext.presenter.StateSearchPresenter;
@@ -41,12 +42,12 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
 
     @Override
     public void onSuccess(StateSearchResult stateSearchResult) {
-
+        Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onFail() {
-
+    public void onFail(String message) {
+        Toast.makeText(this, "Error: " + message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

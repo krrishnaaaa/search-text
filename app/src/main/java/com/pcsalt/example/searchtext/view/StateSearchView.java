@@ -9,7 +9,7 @@ import com.pcsalt.example.searchtext.model.StateSearchResult;
 public interface StateSearchView extends View {
     void onSuccess(StateSearchResult stateSearchResult);
 
-    void onFail();
+    void onFail(String message);
 
     void showProgress();
 
