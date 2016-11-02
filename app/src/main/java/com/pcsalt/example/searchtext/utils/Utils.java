@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.pcsalt.example.searchtext.BuildConfig;
 import com.pcsalt.example.searchtext.R;
 
+import java.io.EOFException;
 import java.io.IOException;
 
 import retrofit2.adapter.rxjava.HttpException;
@@ -41,6 +42,8 @@ public final class Utils {
         }
         if (throwable instanceof HttpException) {
             return context.getString(R.string.err_connection_lost);
+        } else if (throwable instanceof EOFException) {
+            return "Provide valid data";
         } else if (throwable instanceof IOException) {
             return context.getString(R.string.err_no_network);
         } else {
