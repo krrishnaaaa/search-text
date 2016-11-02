@@ -98,10 +98,13 @@ public class IpSearchActivity extends AppCompatActivity implements IPSearchView 
 
     private void search() {
         Utils.hideKeyboard(getContext(), mEtSearch);
-        if (Utils.getText(mEtSearch).isEmpty()) {
+        final String ip = Utils.getText(mEtSearch);
+        if (ip.isEmpty()) {
             onFail("Enter some text to search");
+        } else if (!Utils.isValidIp(ip)) {
+            onFail("Provide valid IP address");
         } else {
-            mPresenter.searchIP(Utils.getText(mEtSearch));
+            mPresenter.searchIP(ip);
         }
     }
 }

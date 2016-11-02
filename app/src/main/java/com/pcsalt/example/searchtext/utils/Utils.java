@@ -1,6 +1,7 @@
 package com.pcsalt.example.searchtext.utils;
 
 import android.content.Context;
+import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -24,6 +25,14 @@ public final class Utils {
         if (textView == null)
             return "";
         return textView.getText().toString().trim();
+    }
+
+    public static boolean isValidIp(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return Patterns.IP_ADDRESS.matcher(target).matches();
+        }
     }
 
     public static String errorHandleResponse(Throwable throwable, Context context) {
