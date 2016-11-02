@@ -16,6 +16,6 @@ public class StateSearchPresenter implements Presenter<StateSearchView> {
     }
 
     public void searchState(String name) {
-
+        mView.showProgress();
     }
 }

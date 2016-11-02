@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.pcsalt.example.searchtext.model.StateSearchResult;
 import com.pcsalt.example.searchtext.presenter.StateSearchPresenter;
+import com.pcsalt.example.searchtext.utils.Utils;
 import com.pcsalt.example.searchtext.view.StateSearchView;
 
 /**
@@ -22,6 +23,7 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
     private StateSearchPresenter mPresenter;
     private EditText mEtSearch;
     private RecyclerView mRvResult;
+    private View mProgressView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
         mPresenter = new StateSearchPresenter();
         mPresenter.attachView(this);
 
+        mProgressView = findViewById(R.id.ll_progress);
         mEtSearch = (EditText) findViewById(R.id.et_search_state);
         mRvResult = (RecyclerView) findViewById(R.id.rv_search_state);
         mRvResult.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -48,12 +51,12 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
 
     @Override
     public void showProgress() {
-
+        mProgressView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        mProgressView.setVisibility(View.GONE);
     }
 
     @Override
@@ -62,5 +65,6 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
     }
 
     public void search(View view) {
+        mPresenter.searchState(Utils.getText(mEtSearch));
     }
 }
