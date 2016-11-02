@@ -42,7 +42,7 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
 
     @Override
     public void onSuccess(StateSearchResult stateSearchResult) {
-        Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+        mRvResult.setAdapter(new StateListAdapter(stateSearchResult.getRestResponse().getResults()));
     }
 
     @Override
