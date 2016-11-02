@@ -94,8 +94,12 @@ public class StateSearchActivity extends AppCompatActivity implements StateSearc
         return this;
     }
 
-    public void search() {
+    private void search() {
         Utils.hideKeyboard(getContext(), mEtSearch);
-        mPresenter.searchState(Utils.getText(mEtSearch));
+        if (Utils.getText(mEtSearch).isEmpty()) {
+            onFail("Enter some text to search");
+        } else {
+            mPresenter.searchState(Utils.getText(mEtSearch));
+        }
     }
 }

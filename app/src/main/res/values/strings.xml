@@ -3,6 +3,7 @@
     <string name="lbl_state_search">State Search</string>
     <string name="lbl_ip_search">IP Search</string>
     <string name="hint_enter_state_name">Enter state name</string>
+    <string name="hint_enter_ip">Enter IP address</string>
     <string name="lbl_search">Search</string>
 
     <string name="err_connection_lost">Connection with server is lost. Please try in few minutes.</string>
@@ -11,5 +12,7 @@
     <string name="txt_largest_city">Largest City: %s</string>
     <string name="txt_capital">Capital: %s</string>
     <string name="txt_state">State: %s</string>
+
+    <string name="txt_ip_info">%1$s\n%2$s, %3$s (%4$s)\n%5$s</string>
 
 </resources>

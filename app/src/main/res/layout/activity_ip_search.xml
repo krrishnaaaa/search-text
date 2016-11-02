@@ -4,4 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/et_search_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:digits="1234567890."
+        android:hint="@string/hint_enter_ip"
+        android:maxLines="1" />
+
+    <include layout="@layout/layout_ip_result" />
+
+    <include layout="@layout/layout_progress" />
+
+    <include layout="@layout/layout_error" />
 </LinearLayout>

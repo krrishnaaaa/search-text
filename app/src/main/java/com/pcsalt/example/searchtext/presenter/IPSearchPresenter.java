@@ -1,9 +1,9 @@
 package com.pcsalt.example.searchtext.presenter;
 
 import com.pcsalt.example.searchtext.dataservice.ApiService;
-import com.pcsalt.example.searchtext.model.StateSearchResult;
+import com.pcsalt.example.searchtext.model.IPSearchResult;
 import com.pcsalt.example.searchtext.utils.Utils;
-import com.pcsalt.example.searchtext.view.StateSearchView;
+import com.pcsalt.example.searchtext.view.IPSearchView;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -11,35 +11,34 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by Navkrishna on 02 November, 2016
+ * Created by Navkrishna on 03 November, 2016
  */
 
-public class StateSearchPresenter implements Presenter<StateSearchView> {
-
-    private StateSearchView mView;
+public class IPSearchPresenter implements Presenter<IPSearchView> {
+    private IPSearchView mView;
     private Subscription mSubscription;
-    private StateSearchResult mResult;
+    private IPSearchResult mResult;
 
     @Override
-    public void attachView(StateSearchView view) {
+    public void attachView(IPSearchView view) {
         this.mView = view;
     }
 
-    public void searchState(String name) {
+    public void searchIP(String ip) {
         mView.showProgress();
         if (mSubscription != null) mSubscription.unsubscribe();
 
-        ApiService apiService = ApiService.Factory.getStateSearchService();
+        ApiService apiService = ApiService.Factory.getIpSearchService();
 
-        mSubscription = apiService.searchState(name)
+        mSubscription = apiService.searchIP(ip)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<StateSearchResult>() {
+                .subscribe(new Subscriber<IPSearchResult>() {
                     @Override
                     public void onCompleted() {
                         mView.hideProgress();
-                        if (mResult.getRestResponse().getResults().isEmpty()) {
-                            mView.onFail(mResult.getRestResponse().getMessage().get(1));
+                        if (mResult.getRestResponse().getResult().getCountryIso2() == null) {
+                            mView.onFail("Invalid IP");
                         } else {
                             mView.onSuccess(mResult);
                         }
@@ -52,7 +51,7 @@ public class StateSearchPresenter implements Presenter<StateSearchView> {
                     }
 
                     @Override
-                    public void onNext(StateSearchResult stateSearchResult) {
+                    public void onNext(IPSearchResult stateSearchResult) {
                         mResult = stateSearchResult;
                     }
                 });
