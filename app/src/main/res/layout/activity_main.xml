@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="stateSearch"
-            android:text="@string/state_search" />
+            android:text="@string/lbl_state_search" />
 
         <Button
             android:layout_width="match_parent"

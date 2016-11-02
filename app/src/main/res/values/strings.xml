@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Search Text</string>
-    <string name="state_search">State Search</string>
-    <string name="ip_search">IP Search</string>
+    <string name="lbl_state_search">State Search</string>
+    <string name="lbl_ip_search">IP Search</string>
+    <string name="hint_enter_state_name">Enter state name</string>
+    <string name="lbl_search">Search</string>
 </resources>
